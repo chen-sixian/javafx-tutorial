@@ -1,5 +1,9 @@
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -9,8 +13,11 @@ import javafx.scene.layout.HBox;
  * Represents a message and an avatar identifying its speaker.
  */
 public class DialogBox extends HBox {
-    private final Label text;
-    private final Label avatar;
+    @FXML
+    private Label text;
+
+    @FXML
+    private Label avatar;
 
     /**
      * Creates a dialog box with the given message and avatar text.
@@ -18,25 +25,19 @@ public class DialogBox extends HBox {
      * @param message Message to display.
      * @param avatarText Short text identifying the speaker.
      */
-    public DialogBox(String message, String avatarText) {
-        text = new Label(message);
-        avatar = new Label(avatarText);
+    private DialogBox(String message, String avatarText) {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/DialogBox.fxml"));
+        fxmlLoader.setController(this);
+        fxmlLoader.setRoot(this);
 
-        text.setWrapText(true);
-        text.setMaxWidth(260.0);
-        text.setStyle("-fx-padding: 10; -fx-background-color: #e8eef7; "
-                + "-fx-background-radius: 10;");
+        try {
+            fxmlLoader.load();
+        } catch (IOException exception) {
+            throw new IllegalStateException("Unable to load dialog-box layout", exception);
+        }
 
-        avatar.setAlignment(Pos.CENTER);
-        avatar.setMinSize(72.0, 72.0);
-        avatar.setPrefSize(72.0, 72.0);
-        avatar.setStyle("-fx-background-color: #4169e1; -fx-background-radius: 36; "
-                + "-fx-text-fill: white; -fx-font-weight: bold;");
-
-        setAlignment(Pos.TOP_RIGHT);
-        setSpacing(10.0);
-        setStyle("-fx-padding: 15 5 15 5;");
-        getChildren().addAll(text, avatar);
+        text.setText(message);
+        avatar.setText(avatarText);
     }
 
     /**
