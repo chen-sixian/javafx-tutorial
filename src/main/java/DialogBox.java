@@ -69,5 +69,7 @@ public class DialogBox extends HBox {
         FXCollections.reverse(children);
         getChildren().setAll(children);
         setAlignment(Pos.TOP_LEFT);
+        text.getStyleClass().add("reply-label");
+        avatar.getStyleClass().add("reply-avatar");
     }
 }
