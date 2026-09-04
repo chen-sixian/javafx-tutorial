@@ -17,6 +17,7 @@ public class Main extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private final Duke duke = new Duke();
 
     /**
      * Creates and shows the primary JavaFX window.
@@ -70,12 +71,15 @@ public class Main extends Application {
      * Adds the user's input to the conversation and clears the input field.
      */
     private void handleUserInput() {
-        String input = userInput.getText();
-        if (input.isBlank()) {
+        String userText = userInput.getText();
+        if (userText.isBlank()) {
             return;
         }
 
-        dialogContainer.getChildren().add(new DialogBox(input, "YOU"));
+        String dukeText = duke.getResponse(userText);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, "YOU"),
+                DialogBox.getDukeDialog(dukeText, "D"));
         userInput.clear();
     }
 }

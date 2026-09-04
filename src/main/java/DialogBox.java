@@ -1,4 +1,7 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
@@ -34,5 +37,36 @@ public class DialogBox extends HBox {
         setSpacing(10.0);
         setStyle("-fx-padding: 15 5 15 5;");
         getChildren().addAll(text, avatar);
+    }
+
+    /**
+     * Creates a right-aligned dialog box for the user.
+     *
+     * @param message User's message.
+     * @param avatarText Text displayed in the user's avatar.
+     * @return User dialog box.
+     */
+    public static DialogBox getUserDialog(String message, String avatarText) {
+        return new DialogBox(message, avatarText);
+    }
+
+    /**
+     * Creates a left-aligned dialog box for Duke.
+     *
+     * @param message Duke's message.
+     * @param avatarText Text displayed in Duke's avatar.
+     * @return Duke dialog box.
+     */
+    public static DialogBox getDukeDialog(String message, String avatarText) {
+        DialogBox dialogBox = new DialogBox(message, avatarText);
+        dialogBox.flip();
+        return dialogBox;
+    }
+
+    private void flip() {
+        ObservableList<Node> children = FXCollections.observableArrayList(getChildren());
+        FXCollections.reverse(children);
+        getChildren().setAll(children);
+        setAlignment(Pos.TOP_LEFT);
     }
 }
