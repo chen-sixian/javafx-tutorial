@@ -1,0 +1,79 @@
+.root {
+    -app-background: #f4f6fb;
+    -app-surface: #ffffff;
+    -app-border: #d8deea;
+    -app-accent: #5865d8;
+    -app-text: #20283a;
+
+    -fx-background-color: -app-background;
+    -fx-font-family: "System";
+    -fx-font-size: 14px;
+}
+
+.scroll-pane,
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+#dialogContainer {
+    -fx-background-color: -app-background;
+    -fx-padding: 12px 8px 18px 8px;
+    -fx-spacing: 2px;
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 10px;
+    -fx-padding: 2px;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #bdc5d6;
+    -fx-background-radius: 8px;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+.text-field {
+    -fx-background-color: -app-surface;
+    -fx-background-radius: 10px;
+    -fx-border-color: -app-border;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1px;
+    -fx-font-size: 15px;
+    -fx-padding: 0 13px;
+    -fx-prompt-text-fill: #8a93a5;
+    -fx-text-fill: -app-text;
+}
+
+.text-field:focused {
+    -fx-border-color: -app-accent;
+    -fx-effect: dropshadow(gaussian, rgba(88, 101, 216, 0.18), 8, 0.1, 0, 1);
+}
+
+.button {
+    -fx-background-color: -app-accent;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.button:hover {
+    -fx-background-color: derive(-app-accent, 12%);
+}
+
+.button:pressed {
+    -fx-background-color: derive(-app-accent, -12%);
+    -fx-translate-y: 1px;
+}
