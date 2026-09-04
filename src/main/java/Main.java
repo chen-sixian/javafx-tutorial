@@ -31,8 +31,6 @@ public class Main extends Application {
 
         userInput = new TextField();
         sendButton = new Button("Send");
-        DialogBox dialogBox = new DialogBox("Hello!", "YOU");
-        dialogContainer.getChildren().add(dialogBox);
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -60,7 +58,24 @@ public class Main extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        sendButton.setOnMouseClicked(event -> handleUserInput());
+        userInput.setOnAction(event -> handleUserInput());
+        dialogContainer.heightProperty().addListener(observable -> scrollPane.setVvalue(1.0));
+
         stage.setScene(scene);
         stage.show();
+    }
+
+    /**
+     * Adds the user's input to the conversation and clears the input field.
+     */
+    private void handleUserInput() {
+        String input = userInput.getText();
+        if (input.isBlank()) {
+            return;
+        }
+
+        dialogContainer.getChildren().add(new DialogBox(input, "YOU"));
+        userInput.clear();
     }
 }
